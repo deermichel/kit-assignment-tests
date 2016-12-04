@@ -5,7 +5,8 @@ import edu.kit.informatik.tessellation.*;
   (KIT Programming WS16/17)
 
   @author Micha Hanselmann
-  @version 1.0.0
+  @author Luke Brocke
+  @version 1.1.0
 */
 public class TessellationTest {
 
@@ -103,12 +104,87 @@ public class TessellationTest {
     test(tile4.isRotationEqualTo(tile3), tile4.toString() + " isRotationEqualTo " + tile3.toString(), "Returned false but should be true");
     test(tile4.canBeRecoloredTo(tile3), tile4.toString() + " canBeRecoloredTo " + tile3.toString(), "Returned false but should be true");
 
+    log("--- example test of assignment (listing 3) ---");
+    Board b1 = new Board();
+    test(b1.isEmpty(), "Board 1 isEmpty", "Returned false but should be true");
 
+    b1.setTile(1, new Tile(new LineType[] {LineType.GREEN, LineType.GREEN, LineType.YELLOW, LineType.NONE, LineType.YELLOW, LineType.NONE }));
+    b1.setTile(4, new Tile(new LineType[] {LineType.RED, LineType.GREEN, LineType.RED, LineType.GREEN, LineType.YELLOW, LineType.YELLOW }));
 
-    log("--- more tests tba ---");
-    //log("--- additional tests (validity not guaranteed!) ---");
+    test(!b1.isEmpty(), "Board 2 isEmpty is false", "Returned true but should be false");
+    test(b1.isValid(), "Board 2 isValid", "Returned false but should be true");
+
+    test(b1.toString().equals("------;GGY-Y-;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;"), "Board 2 toString is correct", "toString produced wrong output");
+    test(b1.getConnectedPathColor(new int[] {1, 4}) == LineType.YELLOW, "Board 2 getConnectedPathColor on tile 1 and 4 is YELLOW", "Wrong color, must be YELLOW");
+
+    b1.rotateTileClockwise(1);
+    test(!b1.isValid(), "Board 3 isValid is false", "Returned true but should be false");
+    test(b1.toString().equals("------;-GGY-Y;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;"), "Board 3 toString is correct", "toString produced wrong output");
+    test(b1.getConnectedPathColor(new int[] {1, 4}) == LineType.NONE, "Board 3 getConnectedPathColor on tile 1 and 4 is NONE", "Wrong color, must be NONE");
+
+    log("--- additional tests (validity not guaranteed!) ---");
+
+    Tile tile5 = new Tile(new LineType[] {LineType.YELLOW, LineType.GREEN, LineType.RED, LineType.YELLOW, LineType.GREEN, LineType.RED});
+    Tile tile6 = new Tile();
+
+    test(tile5.getLineTypeAtIndex(3) == LineType.YELLOW, "getLineTypeAtIndex(3) of YGRYGR", tile5.getLineTypeAtIndex(3).toString());
+    test(tile5.getNumberOfColors() == 3, "getNumberOfColors of YGRYGR = 3", Integer.toString(tile5.getNumberOfColors()));
+    test(tile6.getNumberOfColors() == 0, "getNumberOfColors of ------ = 0", Integer.toString(tile6.getNumberOfColors()));
+
+    tile5.rotateClockwise();
+    test(tile5.toString().equals("RYGRYG"), "rotateClockwise YGRYGR = RYGRYG", tile5.toString());
+    for(int i = 0; i < 3; i++)
+      tile5.rotateCounterClockwise();
+    test(tile5.toString().equals("RYGRYG"), "rotateClockwise YGRYGR = RYGRYG", tile5.toString());
+
+    test(tile5.canBeRecoloredTo(tile5), tile5.toString() + " canBeRecoloredTo " + tile5.toString(), "Returned false but should be true");
+    test(!tile6.canBeRecoloredTo(tile5), tile6.toString() + " canBeRecoloredTo " + tile5.toString() + " is false", "Returned true");
+    test(!tile5.canBeRecoloredTo(tile6), tile5.toString() + " canBeRecoloredTo " + tile6.toString() + " is false", "Returned true");
+
+    test(tile5.dominates(tile6), tile5.toString() + " dominates " + tile6.toString(), "Returned false but should be true");
+    test(!tile6.dominates(tile5), tile6.toString() + " dominates " + tile6.toString() + " is false", "Returned true");
+
+    // board from image 9
+    Board b4 = new Board();
+    b4.setTile(1, new Tile(new LineType[] {LineType.GREEN, LineType.GREEN, LineType.YELLOW, LineType.NONE, LineType.YELLOW, LineType.NONE}));
+    b4.setTile(2, new Tile(new LineType[] {LineType.NONE, LineType.NONE, LineType.NONE, LineType.NONE, LineType.RED, LineType.RED}));
+    b4.setTile(4, new Tile(new LineType[] {LineType.RED, LineType.GREEN, LineType.RED, LineType.GREEN, LineType.YELLOW, LineType.YELLOW}));
+    b4.setTile(5, new Tile(new LineType[] {LineType.GREEN, LineType.GREEN, LineType.NONE, LineType.NONE, LineType.NONE, LineType.NONE}));
+    b4.setTile(6, new Tile(new LineType[] {LineType.NONE, LineType.NONE, LineType.YELLOW, LineType.GREEN, LineType.GREEN, LineType.YELLOW}));
+    b4.setTile(7, new Tile(new LineType[] {LineType.GREEN, LineType.NONE, LineType.NONE, LineType.RED, LineType.GREEN, LineType.RED}));
+    b4.setTile(8, new Tile(new LineType[] {LineType.NONE, LineType.YELLOW, LineType.YELLOW, LineType.NONE, LineType.NONE, LineType.NONE}));
+    b4.setTile(10, new Tile(new LineType[] {LineType.NONE, LineType.NONE, LineType.NONE, LineType.YELLOW, LineType.YELLOW, LineType.NONE}));
+    b4.setTile(11, new Tile(new LineType[] {LineType.YELLOW, LineType.NONE, LineType.NONE, LineType.NONE, LineType.NONE, LineType.YELLOW}));
+
+    test(b4.toString().equals("------;GGY-Y-;----RR;\n------;RGRGYY;GG----;\n--YGGY;G--RGR;-YY---;\n------;---YY-;Y----Y;"), "Board 4 toString is correct", "toString produced wrong output");
+    test(b4.isValid(), "Board 4 isValid", "Returned false but should be true");
+
+    test(b4.getConnectedPathColor(new int[]{0, 3}) == LineType.NONE, "Board 4 getConnectedPathColor on tile 0 and 3 is NONE", "Wrong color, must be NONE");
+    test(b4.getConnectedPathColor(new int[]{1, 4}) == LineType.YELLOW, "Board 4 getConnectedPathColor on tile 1 and 4 is YELLOW", "Wrong color, must be YELLOW");
+    test(b4.getConnectedPathColor(new int[]{1, 2, 4}) == LineType.NONE, "Board 4 getConnectedPathColor on tile 1, 2 and 4 is NONE", "Wrong color, must be NONE");
+    test(b4.getConnectedPathColor(new int[]{4, 5, 7}) == LineType.GREEN, "Board 4 getConnectedPathColor on tile 4, 5 and 7 is GREEN", "Wrong color, must be GREEN");
+    test(b4.getConnectedPathColor(new int[]{4, 5, 7, 6, 4, 5, 7}) == LineType.GREEN, "Board 4 getConnectedPathColor on tile 4, 5, 7, 6, 4, 5 and 7 is GREEN", "Wrong color, must be GREEN");
+    test(b4.getConnectedPathColor(new int[]{8, 10, 11}) == LineType.YELLOW, "Board 4 getConnectedPathColor on tile 8, 10 and 11 is YELLOW", "Wrong color, must be YELLOW");
+    test(b4.getConnectedPathColor(new int[]{8, 10, 11, 8}) == LineType.YELLOW, "Board 4 getConnectedPathColor on tile 8, 10, 11 and 8 is YELLOW", "Wrong color, must be YELLOW");
+
+    b4.rotateTileClockwise(1);
+    b4.rotateTileClockwise(2);
+    b4.rotateTileClockwise(2);
+    b4.rotateTileClockwise(6);
+    b4.rotateTileClockwise(11);
+
+    test(b4.toString().equals("------;-GGY-Y;RR----;\n------;RGRGYY;GG----;\nY--YGG;G--RGR;-YY---;\n------;---YY-;YY----;"), "Board 5 toString is correct", "toString produced wrong output");
+    test(!b4.isValid(), "Board 5 isValid is false", "Returned true but should be false");
+
+    test(b4.getConnectedPathColor(new int[]{0, 3}) == LineType.NONE, "Board 5 getConnectedPathColor on tile 0 and 3 is NONE", "Wrong color, must be NONE");
+    test(b4.getConnectedPathColor(new int[]{1, 4}) == LineType.NONE, "Board 5 getConnectedPathColor on tile 1 and 4 is NONE", "Wrong color, must be NONE");
+    test(b4.getConnectedPathColor(new int[]{1, 2, 4}) == LineType.NONE, "Board 5 getConnectedPathColor on tile 1, 2 and 4 is NONE", "Wrong color, must be NONE");
+    test(b4.getConnectedPathColor(new int[]{4, 5, 7}) == LineType.GREEN, "Board 5 getConnectedPathColor on tile 4, 5 and 7 is GREEN", "Wrong color, must be GREEN");
+    test(b4.getConnectedPathColor(new int[]{4, 5, 7, 6, 4, 5, 7}) == LineType.NONE, "Board 5 getConnectedPathColor on tile 4, 5, 7, 6, 4, 5 and 7 is NONE", "Wrong color, must be NONE");
+    test(b4.getConnectedPathColor(new int[]{8, 10, 11}) == LineType.YELLOW, "Board 5 getConnectedPathColor on tile 8, 10 and 11 is YELLOW", "Wrong color, must be YELLOW");
+    test(b4.getConnectedPathColor(new int[]{8, 10, 11, 8}) == LineType.NONE, "Board 5 getConnectedPathColor on tile 8, 10, 11 and 8 is NONE", "Wrong color, must be NONE");
+
     // --- END ---
-
 
     // display end results
     log("-------------------------------------");
