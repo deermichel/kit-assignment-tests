@@ -114,12 +114,12 @@ public class TessellationTest {
     test(!b1.isEmpty(), "Board 2 isEmpty is false", "Returned true but should be false");
     test(b1.isValid(), "Board 2 isValid", "Returned false but should be true");
 
-    test(b1.toString().equals("------;GGY-Y-;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;"), "Board 2 toString is correct", "toString produced wrong output");
+    test(b1.toString().equals("------;GGY-Y-;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;"), "Board 2 toString is correct", "toString produced wrong output: " + b1.toString());
     test(b1.getConnectedPathColor(new int[] {1, 4}) == LineType.YELLOW, "Board 2 getConnectedPathColor on tile 1 and 4 is YELLOW", "Wrong color, must be YELLOW");
 
     b1.rotateTileClockwise(1);
     test(!b1.isValid(), "Board 3 isValid is false", "Returned true but should be false");
-    test(b1.toString().equals("------;-GGY-Y;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;"), "Board 3 toString is correct", "toString produced wrong output");
+    test(b1.toString().equals("------;-GGY-Y;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;"), "Board 3 toString is correct", "toString produced wrong output: " + b1.toString());
     test(b1.getConnectedPathColor(new int[] {1, 4}) == LineType.NONE, "Board 3 getConnectedPathColor on tile 1 and 4 is NONE", "Wrong color, must be NONE");
 
     log("--- additional tests (validity not guaranteed!) ---");
@@ -156,7 +156,7 @@ public class TessellationTest {
     b4.setTile(10, new Tile(new LineType[] {LineType.NONE, LineType.NONE, LineType.NONE, LineType.YELLOW, LineType.YELLOW, LineType.NONE}));
     b4.setTile(11, new Tile(new LineType[] {LineType.YELLOW, LineType.NONE, LineType.NONE, LineType.NONE, LineType.NONE, LineType.YELLOW}));
 
-    test(b4.toString().equals("------;GGY-Y-;----RR;\n------;RGRGYY;GG----;\n--YGGY;G--RGR;-YY---;\n------;---YY-;Y----Y;"), "Board 4 toString is correct", "toString produced wrong output");
+    test(b4.toString().equals("------;GGY-Y-;----RR;\n------;RGRGYY;GG----;\n--YGGY;G--RGR;-YY---;\n------;---YY-;Y----Y;"), "Board 4 toString is correct", "toString produced wrong output: " + b4.toString());
     test(b4.isValid(), "Board 4 isValid", "Returned false but should be true");
 
     test(b4.getConnectedPathColor(new int[]{0, 3}) == LineType.NONE, "Board 4 getConnectedPathColor on tile 0 and 3 is NONE", "Wrong color, must be NONE");
@@ -173,7 +173,7 @@ public class TessellationTest {
     b4.rotateTileClockwise(6);
     b4.rotateTileClockwise(11);
 
-    test(b4.toString().equals("------;-GGY-Y;RR----;\n------;RGRGYY;GG----;\nY--YGG;G--RGR;-YY---;\n------;---YY-;YY----;"), "Board 5 toString is correct", "toString produced wrong output");
+    test(b4.toString().equals("------;-GGY-Y;RR----;\n------;RGRGYY;GG----;\nY--YGG;G--RGR;-YY---;\n------;---YY-;YY----;"), "Board 5 toString is correct", "toString produced wrong output: " + b4.toString());
     test(!b4.isValid(), "Board 5 isValid is false", "Returned true but should be false");
 
     test(b4.getConnectedPathColor(new int[]{0, 3}) == LineType.NONE, "Board 5 getConnectedPathColor on tile 0 and 3 is NONE", "Wrong color, must be NONE");
