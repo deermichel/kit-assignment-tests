@@ -115,7 +115,7 @@ public class TessellationTest {
 
     // allow toString() results that end with a line break, show a warning instead
     String b1string = "------;GGY-Y-;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;";
-    String b1info = (b1.toString().endsWith("\n")) ? this.warning : "";
+    String b1info = (b1.toString().endsWith("\n")) ? TessellationTest.warning : "";
     test(b1.toString().equals(b1string) || b1.toString().equals(b1string + "\n"), "Board 2 toString is correct" + b1info, "toString produced wrong output: " + b1.toString());
 
     test(b1.getConnectedPathColor(new int[] {1, 4}) == LineType.YELLOW, "Board 2 getConnectedPathColor on tile 1 and 4 is YELLOW", "Wrong color, must be YELLOW");
@@ -124,7 +124,7 @@ public class TessellationTest {
     test(!b1.isValid(), "Board 3 isValid is false", "Returned true but should be false");
 
     b1string = "------;-GGY-Y;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;";
-    b1info = (b1.toString().endsWith("\n")) ? this.warning : "";
+    b1info = (b1.toString().endsWith("\n")) ? TessellationTest.warning : "";
     test(b1.toString().equals(b1string) || b1.toString().equals(b1string + "\n"), "Board 3 toString is correct" + b1info, "toString produced wrong output: " + b1.toString());
 
     test(b1.getConnectedPathColor(new int[] {1, 4}) == LineType.NONE, "Board 3 getConnectedPathColor on tile 1 and 4 is NONE", "Wrong color, must be NONE");
@@ -165,7 +165,7 @@ public class TessellationTest {
     b4.setTile(11, new Tile(new LineType[] {LineType.YELLOW, LineType.NONE, LineType.NONE, LineType.NONE, LineType.NONE, LineType.YELLOW}));
 
     String b4string = "------;GGY-Y-;----RR;\n------;RGRGYY;GG----;\n--YGGY;G--RGR;-YY---;\n------;---YY-;Y----Y;";
-    String b4info = (b4.toString().endsWith("\n")) ? this.warning : "";
+    String b4info = (b4.toString().endsWith("\n")) ? TessellationTest.warning : "";
     test(b4.toString().equals(b4string) || b4.toString().equals(b4string + "\n"), "Board 4 toString is correct" + b4info, "toString produced wrong output: " + b4.toString());
 
     test(b4.isValid(), "Board 4 isValid", "Returned false but should be true");
@@ -186,7 +186,7 @@ public class TessellationTest {
     b4.rotateTileClockwise(11);
 
     b4string = "------;-GGY-Y;RR----;\n------;RGRGYY;GG----;\nY--YGG;G--RGR;-YY---;\n------;---YY-;YY----;";
-    b4info = (b4.toString().endsWith("\n")) ? this.warning : "";
+    b4info = (b4.toString().endsWith("\n")) ? TessellationTest.warning : "";
     test(b4.toString().equals(b4string) || b4.toString().equals(b4string + "\n"), "Board 5 toString is correct" + b4info, "toString produced wrong output: " + b4.toString());
 
     test(!b4.isValid(), "Board 5 isValid is false", "Returned true but should be false");
