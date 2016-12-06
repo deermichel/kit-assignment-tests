@@ -6,14 +6,15 @@ import edu.kit.informatik.tessellation.*;
 
   @author Micha Hanselmann
   @author Luke Brocke
-  @version 1.1.0
+  @version 1.1.1
 */
 public class TessellationTest {
-
   // counter
   int passed = 0;
   int failed = 0;
 
+  // static warning string
+  private static String warning = ", WARNING: ENDS WITH LINE BREAK!";
 
   // main method
   public static void main(String[] args) {
@@ -21,14 +22,11 @@ public class TessellationTest {
   }
 
   public TessellationTest() {
-
     // display header
     log("Test for Assignment 3 - Tessellation");
     log("-------------------------------------");
 
-
     // --- START ---
-
 
     // basic methods
     LineType[] lines1 = { LineType.NONE, LineType.YELLOW, LineType.RED,
@@ -104,6 +102,7 @@ public class TessellationTest {
     test(tile4.isRotationEqualTo(tile3), tile4.toString() + " isRotationEqualTo " + tile3.toString(), "Returned false but should be true");
     test(tile4.canBeRecoloredTo(tile3), tile4.toString() + " canBeRecoloredTo " + tile3.toString(), "Returned false but should be true");
 
+    // example tests for board class
     log("--- example test of assignment (listing 3) ---");
     Board b1 = new Board();
     test(b1.isEmpty(), "Board 1 isEmpty", "Returned false but should be true");
@@ -114,14 +113,23 @@ public class TessellationTest {
     test(!b1.isEmpty(), "Board 2 isEmpty is false", "Returned true but should be false");
     test(b1.isValid(), "Board 2 isValid", "Returned false but should be true");
 
-    test(b1.toString().equals("------;GGY-Y-;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;"), "Board 2 toString is correct", "toString produced wrong output: " + b1.toString());
+    // allow toString() results that end with a line break, show a warning instead
+    String b1string = "------;GGY-Y-;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;";
+    String b1info = (b1.toString().endsWith("\n")) ? this.warning : "";
+    test(b1.toString().equals(b1string) || b1.toString().equals(b1string + "\n"), "Board 2 toString is correct" + b1info, "toString produced wrong output: " + b1.toString());
+
     test(b1.getConnectedPathColor(new int[] {1, 4}) == LineType.YELLOW, "Board 2 getConnectedPathColor on tile 1 and 4 is YELLOW", "Wrong color, must be YELLOW");
 
     b1.rotateTileClockwise(1);
     test(!b1.isValid(), "Board 3 isValid is false", "Returned true but should be false");
-    test(b1.toString().equals("------;-GGY-Y;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;"), "Board 3 toString is correct", "toString produced wrong output: " + b1.toString());
+
+    b1string = "------;-GGY-Y;------;\n------;RGRGYY;------;\n------;------;------;\n------;------;------;";
+    b1info = (b1.toString().endsWith("\n")) ? this.warning : "";
+    test(b1.toString().equals(b1string) || b1.toString().equals(b1string + "\n"), "Board 3 toString is correct" + b1info, "toString produced wrong output: " + b1.toString());
+
     test(b1.getConnectedPathColor(new int[] {1, 4}) == LineType.NONE, "Board 3 getConnectedPathColor on tile 1 and 4 is NONE", "Wrong color, must be NONE");
 
+    // some additional tests
     log("--- additional tests (validity not guaranteed!) ---");
 
     Tile tile5 = new Tile(new LineType[] {LineType.YELLOW, LineType.GREEN, LineType.RED, LineType.YELLOW, LineType.GREEN, LineType.RED});
@@ -156,7 +164,10 @@ public class TessellationTest {
     b4.setTile(10, new Tile(new LineType[] {LineType.NONE, LineType.NONE, LineType.NONE, LineType.YELLOW, LineType.YELLOW, LineType.NONE}));
     b4.setTile(11, new Tile(new LineType[] {LineType.YELLOW, LineType.NONE, LineType.NONE, LineType.NONE, LineType.NONE, LineType.YELLOW}));
 
-    test(b4.toString().equals("------;GGY-Y-;----RR;\n------;RGRGYY;GG----;\n--YGGY;G--RGR;-YY---;\n------;---YY-;Y----Y;"), "Board 4 toString is correct", "toString produced wrong output: " + b4.toString());
+    String b4string = "------;GGY-Y-;----RR;\n------;RGRGYY;GG----;\n--YGGY;G--RGR;-YY---;\n------;---YY-;Y----Y;";
+    String b4info = (b4.toString().endsWith("\n")) ? this.warning : "";
+    test(b4.toString().equals(b4string) || b4.toString().equals(b4string + "\n"), "Board 4 toString is correct" + b4info, "toString produced wrong output: " + b4.toString());
+
     test(b4.isValid(), "Board 4 isValid", "Returned false but should be true");
 
     test(b4.getConnectedPathColor(new int[]{0, 3}) == LineType.NONE, "Board 4 getConnectedPathColor on tile 0 and 3 is NONE", "Wrong color, must be NONE");
@@ -167,13 +178,17 @@ public class TessellationTest {
     test(b4.getConnectedPathColor(new int[]{8, 10, 11}) == LineType.YELLOW, "Board 4 getConnectedPathColor on tile 8, 10 and 11 is YELLOW", "Wrong color, must be YELLOW");
     test(b4.getConnectedPathColor(new int[]{8, 10, 11, 8}) == LineType.YELLOW, "Board 4 getConnectedPathColor on tile 8, 10, 11 and 8 is YELLOW", "Wrong color, must be YELLOW");
 
+    // change to board from image 10
     b4.rotateTileClockwise(1);
     b4.rotateTileClockwise(2);
     b4.rotateTileClockwise(2);
     b4.rotateTileClockwise(6);
     b4.rotateTileClockwise(11);
 
-    test(b4.toString().equals("------;-GGY-Y;RR----;\n------;RGRGYY;GG----;\nY--YGG;G--RGR;-YY---;\n------;---YY-;YY----;"), "Board 5 toString is correct", "toString produced wrong output: " + b4.toString());
+    b4string = "------;-GGY-Y;RR----;\n------;RGRGYY;GG----;\nY--YGG;G--RGR;-YY---;\n------;---YY-;YY----;";
+    b4info = (b4.toString().endsWith("\n")) ? this.warning : "";
+    test(b4.toString().equals(b4string) || b4.toString().equals(b4string + "\n"), "Board 5 toString is correct" + b4info, "toString produced wrong output: " + b4.toString());
+
     test(!b4.isValid(), "Board 5 isValid is false", "Returned true but should be false");
 
     test(b4.getConnectedPathColor(new int[]{0, 3}) == LineType.NONE, "Board 5 getConnectedPathColor on tile 0 and 3 is NONE", "Wrong color, must be NONE");
@@ -190,7 +205,6 @@ public class TessellationTest {
     log("-------------------------------------");
     int total = passed + failed;
     log(total + " tests finished. " + passed + " passed - " + failed + " failed (" + (int) ((float) passed / total * 100.0) + "%)");
-
   }
 
   // test condition logging description, if fails -> log error
