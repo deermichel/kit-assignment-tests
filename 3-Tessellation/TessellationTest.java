@@ -1,4 +1,4 @@
-package edu.kit.informatik.tesselation;
+import edu.kit.informatik.tesselation.*;
 
 /**
   Test for Assignment 3 - Tessellation
