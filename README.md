@@ -8,4 +8,6 @@ Feel free to improve, update, extend or add tests.
 Task A1 requires you to add a package declaration to your classes.
 In case you don't use the `edu.kit.informatik.tessellation` package for your own classes, make sure to adjust the first line of the TessellationTest.java file!
 
+#### As of assignment 4, tests are based on JUnit and therefore require JUnit being added to your build path.
+
 #### DISCLAIMER: Validity of tests not guaranteed!
