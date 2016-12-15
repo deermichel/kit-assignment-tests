@@ -38,5 +38,32 @@ public class SortedListTest {
         assertArrayEquals(new Integer[] { 1, 2, 3, 5 }, results.toArray(new Integer[results.size()]));
         
     }
+    
+    @Test
+    public void testStrings() {
+        
+        // create a list with different strings
+        LinkedSortedAppendList<String> list = new LinkedSortedAppendList<>();
+        list.addSorted("cc");
+        list.addSorted("da");
+        list.addSorted("d");
+        list.addSorted("aaa");
+        list.addSorted("fa");
+        list.addSorted("d");
+        
+        // check iterator
+        SortedIterator<String> iterator = list.iterator();
+        assertTrue("Iterator hasNext() returned false but should be true", iterator.hasNext());
+        
+        // get items from list
+        ArrayList<String> results = new ArrayList<>();
+        while (iterator.hasNext())
+            results.add(iterator.next());
+        
+        // check sorting of list
+        assertArrayEquals(new String[] { "aaa", "cc", "d", "d", "da", "fa" }, 
+                results.toArray(new String[results.size()]));
+        
+    }
 
 }
