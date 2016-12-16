@@ -25,6 +25,10 @@ public class Terminal {
             "← add appointment 29-11-2016T17:00:00 14-12-2016T13:00:00 Blatt 3", 
             "← add appointment 13-12-2016T17:00:00 11-01-2017T13:00:00 Blatt 4",
             "← add appointment 05-11-2016T13:00:00 05-11-2016T14:00:00 Kaffee",
+            "← print appointments",
+            "Kaffee 05-11-2016T13:00:00 05-11-2016T14:00:00",
+            "Blatt 3 29-11-2016T17:00:00 14-12-2016T13:00:00",
+            "Blatt 4 13-12-2016T17:00:00 11-01-2017T13:00:00",
             "← print appointments that start before 01-12-2016T00:00:00",
             "Kaffee 05-11-2016T13:00:00 05-11-2016T14:00:00",
             "Blatt 3 29-11-2016T17:00:00 14-12-2016T13:00:00",
@@ -53,11 +57,11 @@ public class Terminal {
         
         // check if input expected
         if (code[i].startsWith("←"))
-            System.err.println("Problem at line " + i++ + ": Input expected. Your output was too long.");
+            System.out.println("Problem at line " + i++ + ": Input expected. Your output was too long.");
         
         // check if output matches
         if (!code[i++].equals(s))
-            System.err.println("Problem at line " + i + ": Output is incorrect: " + s);
+            System.out.println("Problem at line " + i + ": Output is incorrect: " + s);
         
     }
 
@@ -71,7 +75,7 @@ public class Terminal {
         
         // check if output expected
         if (!code[i].startsWith("←"))
-            System.err.println("Problem at line " + i++ + ": Output expected. Your output was too short.");
+            System.out.println("Problem at line " + i++ + ": Output expected. Your output was too short.");
         
         // think like an user, act like an user
         return code[i++].substring(2);
