@@ -10,7 +10,8 @@ import org.junit.runners.Suite.SuiteClasses;
     C0Test.class,
     C1Test.class,
     C2Test.class,
-    C3Test.class
+    C3Test.class,
+    C4Test.class
 })
 
 public class AllTests { }
