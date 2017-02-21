@@ -1,6 +1,5 @@
 package edu.kit.informatik.tests;
 
-import static org.hamcrest.Matchers.*;
 import org.junit.*;
 
 import edu.kit.informatik.Terminal;
