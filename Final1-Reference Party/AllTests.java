@@ -12,6 +12,7 @@ import org.junit.runners.Suite.SuiteClasses;
     C2Test.class,
     C3Test.class,
     C4Test.class,
+    C5Test.class,
     C9Test.class
 })
 
