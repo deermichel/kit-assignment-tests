@@ -22,7 +22,7 @@ public class C4Test {
     public void run() {
 
         // run and terminate
-        Terminal.addSingleLineOutputThatIsExactly("quit", "Ok");
+        TestHelper.expectOk("quit");
         Wrapper.main();
 
         // cleanup
@@ -33,55 +33,55 @@ public class C4Test {
     @Test
     public void invalidSyntax() {
 
-        Terminal.addSingleLineOutputThatMatches("\tadd conference", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add-conference-", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference-", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches(" add conference ", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches(" add conference", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference ", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add  conference", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add  conference", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add Conference", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference ,,", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference ,;", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference  ;,", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference ,2017,", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference Ser,,Ies", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference ;,;,;", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference ,News", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference ,,Test", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference This,Is,", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference ,This,Is,", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference This,s,It", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference A,,serie", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference ser,,i;e", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add conference Tafelwisch;enCon,2017,California", startsWith("Error,"));
+        TestHelper.expectError("\tadd conference");
+        TestHelper.expectError("add-conference-");
+        TestHelper.expectError("add conference-");
+        TestHelper.expectError(" add conference ");
+        TestHelper.expectError(" add conference");
+        TestHelper.expectError("add conference ");
+        TestHelper.expectError("add  conference");
+        TestHelper.expectError("add  conference");
+        TestHelper.expectError("add Conference");
+        TestHelper.expectError("add conference ,,");
+        TestHelper.expectError("add conference ,;");
+        TestHelper.expectError("add conference  ;,");
+        TestHelper.expectError("add conference ,2017,");
+        TestHelper.expectError("add conference Ser,,Ies");
+        TestHelper.expectError("add conference ;,;,;");
+        TestHelper.expectError("add conference ,News");
+        TestHelper.expectError("add conference ,,Test");
+        TestHelper.expectError("add conference This,Is,");
+        TestHelper.expectError("add conference ,This,Is,");
+        TestHelper.expectError("add conference This,s,It");
+        TestHelper.expectError("add conference A,,serie");
+        TestHelper.expectError("add conference ser,,i;e");
+        TestHelper.expectError("add conference Tafelwisch;enCon,2017,California");
 
-        Terminal.addSingleLineOutputThatMatches("add conference WWDC,,", startsWith("Error, "));
-        Terminal.addSingleLineOutputThatMatches("add conference WWDC,2017,", startsWith("Error, "));
-        Terminal.addSingleLineOutputThatMatches("add conference ,2017,CA", startsWith("Error, "));
-        Terminal.addSingleLineOutputThatMatches("add conferenceWWDC,2017,CA", startsWith("Error, "));
+        TestHelper.expectError("add conference WWDC,,");
+        TestHelper.expectError("add conference WWDC,2017,");
+        TestHelper.expectError("add conference ,2017,CA");
+        TestHelper.expectError("add conferenceWWDC,2017,CA");
     }
 
     @Test
     public void valid() {
 
         // add series
-        Terminal.addSingleLineOutputThatIsExactly("add conference series Apple WWDC", "Ok");
-        Terminal.addSingleLineOutputThatIsExactly("add conference series Google IO", "Ok");
+        TestHelper.expectOk("add conference series Apple WWDC");
+        TestHelper.expectOk("add conference series Google IO");
 
-        Terminal.addSingleLineOutputThatIsExactly("add conference series Weird conference01 v      Series::yes", "Ok");
+        TestHelper.expectOk("add conference series Weird conference01 v      Series::yes");
 
         // add conferences
-        Terminal.addSingleLineOutputThatIsExactly("add conference Apple WWDC,2014,San Francisco CA", "Ok");
-        Terminal.addSingleLineOutputThatIsExactly("add conference Google IO,2014,San Francisco CA", "Ok");
+        TestHelper.expectOk("add conference Apple WWDC,2014,San Francisco CA");
+        TestHelper.expectOk("add conference Google IO,2014,San Francisco CA");
 
-        Terminal.addSingleLineOutputThatIsExactly("add conference Apple WWDC,2015,San Francisco CA", "Ok");
-        Terminal.addSingleLineOutputThatIsExactly("add conference Apple WWDC,2016,San Francisco CA", "Ok");
-        Terminal.addSingleLineOutputThatIsExactly("add conference Apple WWDC,2017,San Jose CA", "Ok");
+        TestHelper.expectOk("add conference Apple WWDC,2015,San Francisco CA");
+        TestHelper.expectOk("add conference Apple WWDC,2016,San Francisco CA");
+        TestHelper.expectOk("add conference Apple WWDC,2017,San Jose CA");
 
-        Terminal.addSingleLineOutputThatIsExactly("add conference Weird conference01 v      Series::yes,1000,At home", "Ok");
-        Terminal.addSingleLineOutputThatIsExactly("add conference Weird conference01 v      Series::yes,9999,At home once again", "Ok");
+        TestHelper.expectOk("add conference Weird conference01 v      Series::yes,1000,At home");
+        TestHelper.expectOk("add conference Weird conference01 v      Series::yes,9999,At home once again");
     }
 
     @Test
@@ -90,29 +90,29 @@ public class C4Test {
         // year must be \in [1000, 9999]
 
         // add series
-        Terminal.addSingleLineOutputThatIsExactly("add conference series WWDC", "Ok");
+        TestHelper.expectOk("add conference series WWDC");
 
-        Terminal.addSingleLineOutputThatMatches("add conference WWDC,0,SF", startsWith("Error, "));
-        Terminal.addSingleLineOutputThatMatches("add conference WWDC,-2017,SJ", startsWith("Error, "));
-        Terminal.addSingleLineOutputThatMatches("add conference WWDC,999,SF", startsWith("Error, "));
-        Terminal.addSingleLineOutputThatMatches("add conference WWDC,10000,SF", startsWith("Error, "));
+        TestHelper.expectError("add conference WWDC,0,SF");
+        TestHelper.expectError("add conference WWDC,-2017,SJ");
+        TestHelper.expectError("add conference WWDC,999,SF");
+        TestHelper.expectError("add conference WWDC,10000,SF");
 
-        for (int year = 1000; year <= 9999; year += 1) {
-            Terminal.addSingleLineOutputThatIsExactly("add conference WWDC," + year + ",San Francisco CA", "Ok");
-        }
+        TestHelper.expectOk("add conference WWDC,2016,San Francisco CA");
+        TestHelper.expectOk("add conference WWDC,1000,San Francisco CA");
+        TestHelper.expectOk("add conference WWDC,9999,San Francisco CA");
     }
 
     @Test
     public void duplicate() {
 
         // add series
-        Terminal.addSingleLineOutputThatIsExactly("add conference series WWDC", "Ok");
+        TestHelper.expectOk("add conference series WWDC");
 
-        Terminal.addSingleLineOutputThatIsExactly("add conference WWDC,2016,San Francisco CA", "Ok");
-        Terminal.addSingleLineOutputThatIsExactly("add conference WWDC,2017,San Jose CA", "Ok");
+        TestHelper.expectOk("add conference WWDC,2016,San Francisco CA");
+        TestHelper.expectOk("add conference WWDC,2017,San Jose CA");
 
-        Terminal.addSingleLineOutputThatMatches("add conference WWDC,2016,Another Place", startsWith("Error, "));
-        Terminal.addSingleLineOutputThatMatches("add conference WWDC,2017,San Francisco CA", startsWith("Error, "));
+        TestHelper.expectError("add conference WWDC,2016,Another Place");
+        TestHelper.expectError("add conference WWDC,2017,San Francisco CA");
 
     }
 }
