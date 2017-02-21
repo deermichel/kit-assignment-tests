@@ -18,7 +18,8 @@ import org.junit.runners.Suite.SuiteClasses;
     C13Test.class,
     C14Test.class,
     C19Test.class,
-    C20Test.class
+    C20Test.class,
+    C21Test.class
 })
 
 public class AllTests { }
