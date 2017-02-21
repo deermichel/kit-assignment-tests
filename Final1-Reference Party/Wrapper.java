@@ -1,5 +1,7 @@
 package edu.kit.informatik.tests;
 
+import net.luk3b.literature.Management;
+
 /**
  * Wrapper class for testing
  * 
@@ -13,7 +15,7 @@ public class Wrapper {
     public static void main(String[] args) {
         
         // adjust to fit your project setup
-        MyMainClass.main(args);
+        Management.main(args);
         
     }
     
