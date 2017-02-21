@@ -43,6 +43,8 @@ public class C2Test {
         Terminal.addSingleLineOutputThatMatches("add journal Fake,", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("add journal Fake,,News", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("add journal Fake;News", startsWith("Error,"));
+        Terminal.addSingleLineOutputThatMatches("add journal Fake;News,Publisher", startsWith("Error,"));
+        Terminal.addSingleLineOutputThatMatches("add journal FakeNews,Publi;sher", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("add journal Fake:News", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("add journal ,News", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("add journal ,,Test", startsWith("Error,"));
