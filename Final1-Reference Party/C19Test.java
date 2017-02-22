@@ -60,21 +60,29 @@ public class C19Test {
         Terminal.addSingleLineOutputThatIsExactly("add author Alpha,Anton", ok);
         Terminal.addSingleLineOutputThatIsExactly("add author Beton,Bieber", ok);
         Terminal.addSingleLineOutputThatIsExactly("add author Corny,Cornelius", ok);
+        Terminal.addSingleLineOutputThatIsExactly("add author Danny,Douglas", ok);
         
         Terminal.addSingleLineOutputThatIsExactly("add journal Blatt,Herausg", ok);
         
         Terminal.addSingleLineOutputThatIsExactly("add article to journal Blatt:id1,2016,Hello World!", ok);
         Terminal.addSingleLineOutputThatIsExactly("add article to journal Blatt:id2,2017,Hello Trump!", ok);
         Terminal.addSingleLineOutputThatIsExactly("add article to journal Blatt:id3,2018,Hello Mars!", ok);
+        Terminal.addSingleLineOutputThatIsExactly("add article to journal Blatt:id4,2019,Hello Pluto!", ok);
+        Terminal.addSingleLineOutputThatIsExactly("add article to journal Blatt:id5,9999,Hello Future!", ok);
         
         Terminal.addSingleLineOutputThatIsExactly("written-by id1,Alpha Anton", ok);
         Terminal.addSingleLineOutputThatIsExactly("written-by id2,Beton Bieber", ok);
         Terminal.addSingleLineOutputThatIsExactly("written-by id3,Corny Cornelius", ok);
+        Terminal.addSingleLineOutputThatIsExactly("written-by id4,Danny Douglas", ok);
         
         Terminal.addSingleLineOutputThatIsExactly("cites id2,id1", ok);
         Terminal.addSingleLineOutputThatIsExactly("cites id3,id1", ok);
+        Terminal.addSingleLineOutputThatIsExactly("cites id4,id1", ok);
         
-        // tests
+        // tests   
+        Terminal.addMultipleLineOutputThatMatches("foreign citations of Alpha Anton", containsInAnyOrder("id2", "id3", "id4"));
+        // id4 should not be listed anymore, although Danny Douglas published together with Alpha Anton after citing him in his "Hello Pluto!" article
+        Terminal.addSingleLineOutputThatIsExactly("written-by id5,Danny Douglas;Alpha Anton", ok);
         Terminal.addMultipleLineOutputThatMatches("foreign citations of Alpha Anton", containsInAnyOrder("id2", "id3"));
         Terminal.addNoOutput("foreign citations of Beton Bieber");
         Terminal.addNoOutput("foreign citations of Corny Cornelius");
