@@ -2,6 +2,7 @@ package edu.kit.informatik.tests;
 
 import edu.kit.informatik.Terminal;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,6 +23,11 @@ public class C19Test {
     @BeforeClass
     public static void enableTerminalTestingMode() {
         Terminal.enableTestingMode();
+    }
+    
+    @Before
+    public void reset() {
+        Terminal.reset();
     }
 
     @After
