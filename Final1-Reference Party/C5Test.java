@@ -61,7 +61,7 @@ public class C5Test {
         TestHelper.expectOk("add article to journal NYT:nr1,2017,Title");
         TestHelper.expectOk("add article to journal NYT:nr2,2017,Title");
 
-        TestHelper.expectOk("add article to series WWDC:swift,2017,Title with spaces - and special characters like \n\t_äüö§$%/(/&%$§◊µ~√ç≈¥…∂ƒ∞∆ªº¨Ω†∑");
+        TestHelper.expectOk("add article to series WWDC:swift,2017,Title with spaces - and special characters like \t_äüö§$%/(/&%$§◊µ~√ç≈¥…∂ƒ∞∆ªº¨Ω†∑");
         TestHelper.expectOk("add article to series WWDC:swift4,2017,ABI support delayed :(");
     }
 

@@ -65,7 +65,8 @@ public class C2Test {
         Terminal.addSingleLineOutputThatIsExactly("add journal TSE,IEEE", "Ok");
         Terminal.addSingleLineOutputThatIsExactly("add journal banane,kirsch", "Ok");
         Terminal.addSingleLineOutputThatIsExactly("add journal HöhereMathematik,Bambusverlag", "Ok");
-        Terminal.addSingleLineOutputThatIsExactly("add journal \n\nWarum?\n,::Yes::", "Ok");
+     // waiting for feedback in the forum
+//        Terminal.addSingleLineOutputThatIsExactly("add journal \n\nWarum?\n,::Yes::", "Ok");
         Terminal.addSingleLineOutputThatIsExactly("add journal Daimler-,Benz", "Ok");
         Terminal.addSingleLineOutputThatIsExactly("add journal ---,@home", "Ok");
         Terminal.addSingleLineOutputThatIsExactly("add journal 23/&§(/$10--,@˛÷˛ÅÍ™∏#", "Ok");
@@ -80,12 +81,14 @@ public class C2Test {
 
         Terminal.addSingleLineOutputThatIsExactly("add journal Ajournal,publisher", "Ok");
         Terminal.addSingleLineOutputThatIsExactly("add journal bjournal,publisher", "Ok");
-        Terminal.addSingleLineOutputThatIsExactly("add journal \n\nWarum?\n,::Yes::", "Ok");
+        // waiting for feedback in the forum
+//        Terminal.addSingleLineOutputThatIsExactly("add journal \n\nWarum?\n,::Yes::", "Ok");
         
         Terminal.addSingleLineOutputThatMatches("add journal Ajournal,publisher", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("add journal Ajournal,other", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("add journal bjournal,publisher", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("add journal \n\nWarum?\n,::No::", startsWith("Error,"));
+     // waiting for feedback in the forum
+//        Terminal.addSingleLineOutputThatMatches("add journal \n\nWarum?\n,::No::", startsWith("Error,"));
         
     }
 
