@@ -39,7 +39,7 @@ public class StupidityTest {
         Terminal.addSingleLineOutputThatMatches("  ", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("\t", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("\r", startsWith("Error,"));
-        Terminal.addSingleLineOutputThatMatches("\n", startsWith("Error,"));
+        // Terminal.addSingleLineOutputThatMatches("\n", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("\f", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("-", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches(" - ", startsWith("Error,"));

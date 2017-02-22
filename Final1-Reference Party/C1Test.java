@@ -67,8 +67,13 @@ public class C1Test {
         Terminal.addSingleLineOutputThatMatches("add author Wolf_,Dieter", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("add author 12,ab", startsWith("Error,"));
         Terminal.addSingleLineOutputThatMatches("add author ab,21", startsWith("Error,"));
+<<<<<<< HEAD
 //        Terminal.addSingleLineOutputThatMatches("add author ',\n", startsWith("Error,"));
 //        Terminal.addSingleLineOutputThatMatches("add author \nDJ\n,Trump", startsWith("Error,"));
+=======
+        // Terminal.addSingleLineOutputThatMatches("add author ',\n", startsWith("Error,"));
+        // Terminal.addSingleLineOutputThatMatches("add author \nDJ\n,Trump", startsWith("Error,"));
+>>>>>>> DeerMichel/master
         
     }
     

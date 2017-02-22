@@ -37,7 +37,7 @@ public class C5Test {
         TestHelper.expectOk("add journal NYT,Publisher0815");
 
         TestHelper.expectError("add article to series,WWDC,article01,2017,Title");
-        TestHelper.expectError("add article to series\nWWDC:article02,2017,Title");
+        TestHelper.expectError("add article to seriesWWDC:article02,2017,Title");
         TestHelper.expectError("add article to :series,WWDC,article03,2017,Title");
         TestHelper.expectError("add article to series WWDC :article04,2017,Title");
         TestHelper.expectError("add article to series WWDC,:article05,2017,Title");

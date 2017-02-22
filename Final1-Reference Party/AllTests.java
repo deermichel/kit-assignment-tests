@@ -17,6 +17,7 @@ import org.junit.runners.Suite.SuiteClasses;
     C10Test.class,
     C13Test.class,
     C14Test.class,
+    C16Test.class,
     C19Test.class,
     C20Test.class,
     C21Test.class
