@@ -17,6 +17,11 @@ public class C9Test {
     public static void enableTerminalTestingMode() {
         Terminal.enableTestingMode();
     }
+    
+    @Before
+    public void reset() {
+        Terminal.reset();
+    }
 
     @After
     public void run() {
