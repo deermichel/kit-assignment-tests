@@ -37,7 +37,7 @@ public class C16Test {
         TestHelper.expectError(" direct h-index");
         TestHelper.expectError("direct  h-index");
         TestHelper.expectError("direct h index");
-        TestHelper.expectError("direct\nh-index 3;4");
+        TestHelper.expectError("direcnh-index 3;4");
         TestHelper.expectError("direct h-index  4;3");
         TestHelper.expectError("direct h-index;");
         
