@@ -21,7 +21,8 @@ import org.junit.runners.Suite.SuiteClasses;
     C16Test.class,
     C19Test.class,
     C20Test.class,
-    C21Test.class
+    C21Test.class,
+    OverallTest1.class
 })
 
 public class AllTests { }
