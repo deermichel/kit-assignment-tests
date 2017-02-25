@@ -1,4 +1,4 @@
-package edu.kit.informatik.matchthree.tests.board;
+package edu.kit.informatik.matchthree.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNull;
 import edu.kit.informatik.matchthree.framework.Position;
 import edu.kit.informatik.matchthree.framework.exceptions.BoardDimensionException;
 import edu.kit.informatik.matchthree.framework.exceptions.TokenStringParseException;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.kit.informatik.matchthree.MatchThreeBoard;
@@ -74,7 +76,7 @@ public class MatchThreeBoardConstructorTest {
     // -- Board from tokenString
     @Test
     public void createValidBoardSucceeds() {
-        new MatchThreeBoard(Token.set("A*sOx+Y="), "A*s;OX ;+Y=");
+        new MatchThreeBoard(Token.set("A*sOX+Y="), "A*s;OX ;+Y=");
     }
 
     @Test
@@ -123,11 +125,13 @@ public class MatchThreeBoardConstructorTest {
         new MatchThreeBoard(Token.set("abc"), "nothing here");
     }
 
+    @Ignore("throw new IliasPostException - maybe BoardDimensionException is more applicable here?")
     @Test(expected = TokenStringParseException.class)
     public void testBoardDimensionsException06() {
         new MatchThreeBoard(Token.set("abc"), "");
     }
 
+    @Ignore("throw new IliasPostException - maybe BoardDimensionException is more applicable here?")
     @Test(expected = TokenStringParseException.class)
     public void testBoardDimensionsException07() {
         new MatchThreeBoard(Token.set("abc"), ";;;");
@@ -156,7 +160,7 @@ public class MatchThreeBoardConstructorTest {
         assertEquals("ox; x; x", board.toTokenString());
 
         final Token o = new Token("o");
-        final Token x = new Token("o");
+        final Token x = new Token("x");
 
         assertEquals(o, board.getTokenAt(Position.at(0, 0)));
         assertEquals(x, board.getTokenAt(Position.at(1, 0)));
