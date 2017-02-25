@@ -99,7 +99,7 @@ public class MatchThreeBoardTest {
         new MatchThreeBoard(Token.set("AB"), "BB;AAA");
     }
 
-    @Test (expected = IllegalTokenException.class)
+    @Test (expected = TokenStringParseException.class)
     public void tokenStringConstructorInvalidToken() {
         
         new MatchThreeBoard(Token.set("AB"), "AB ; C ;AB ");
