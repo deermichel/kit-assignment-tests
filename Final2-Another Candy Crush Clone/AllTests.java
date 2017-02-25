@@ -7,7 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
     MatchThreeBoardTest.class,
-    MatchThreeBoardConstructorTest.class
+    MatchThreeBoardConstructorTest.class,
+    MoveFlipRightTest.class
 })
 
 public class AllTests { }

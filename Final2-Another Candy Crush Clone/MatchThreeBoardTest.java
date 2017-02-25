@@ -10,10 +10,12 @@ import java.util.stream.Stream;
 import org.junit.Test;
 
 import edu.kit.informatik.matchthree.MatchThreeBoard;
+import edu.kit.informatik.matchthree.framework.DeterministicStrategy;
 import edu.kit.informatik.matchthree.framework.Position;
 import edu.kit.informatik.matchthree.framework.Token;
 import edu.kit.informatik.matchthree.framework.exceptions.BoardDimensionException;
 import edu.kit.informatik.matchthree.framework.exceptions.IllegalTokenException;
+import edu.kit.informatik.matchthree.framework.exceptions.NoFillingStrategyException;
 import edu.kit.informatik.matchthree.framework.exceptions.TokenStringParseException;
 import edu.kit.informatik.matchthree.framework.interfaces.Board;
 
@@ -324,7 +326,7 @@ public class MatchThreeBoardTest {
                 Position.at(0, 0), /* -> */ Position.at(0, 2)
                 ).collect(Collectors.toSet());
 
-        assertArrayEquals(expected.toArray(), positions.toArray());
+        assertEquals(expected, positions);
         assertEquals("  B;  B;AAA", board.toTokenString());
     }
     
@@ -343,7 +345,7 @@ public class MatchThreeBoardTest {
                 Position.at(3, 0), /* -> */ Position.at(3, 3)
                 ).collect(Collectors.toSet());
 
-        assertArrayEquals(expected.toArray(), positions.toArray());
+        assertEquals(expected, positions);
         assertEquals("     ;     ; B  A;AB BB;AAABA", board.toTokenString());
     }
     
@@ -362,8 +364,33 @@ public class MatchThreeBoardTest {
                 Position.at(3, 2), /* -> */ Position.at(3, 4)
                 ).collect(Collectors.toSet());
 
-        assertArrayEquals(expected.toArray(), positions.toArray());
+        assertEquals(expected, positions);
         assertEquals("    ;    ;    ;    ; BCA;ABAB", board.toTokenString());
+    }
+    
+    @Test
+    public void fillingStrategy1() {
+        
+        Board board = new MatchThreeBoard(Token.set("AB"), 3, 3);
+        board.setFillingStrategy(new DeterministicStrategy(Token.iterator("AAA"), Token.iterator("ABA"), Token.iterator("BAA")));
+        board.fillWithTokens();
+        
+        assertEquals("AAA;ABA;AAB", board.toTokenString());
+    }
+    
+    @Test
+    public void fillingStrategy2() {
+        
+        Board board = new MatchThreeBoard(Token.set("ABCD"), 4, 4);
+        board.setFillingStrategy(new DeterministicStrategy(Token.iterator("BCAD"), Token.iterator("CCCD"), Token.iterator("DADD"), Token.iterator("ABCD")));
+        board.fillWithTokens();
+        
+        assertEquals("DDDD;ACDC;CCAB;BCDA", board.toTokenString()); // back in black
+    }
+    
+    @Test (expected = NoFillingStrategyException.class)
+    public void noFillingStrategy() {
+        new MatchThreeBoard(Token.set("ABCD"), 4, 4).fillWithTokens();
     }
 
 }
