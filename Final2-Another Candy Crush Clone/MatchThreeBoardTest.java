@@ -3,6 +3,7 @@ package edu.kit.informatik.matchthree.tests;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -311,6 +312,58 @@ public class MatchThreeBoardTest {
             .removeTokensAt(Stream.of(
                     Position.at(0, 0), Position.at(0, 1), null
             ).collect(Collectors.toSet()));
+    }
+    
+    @Test
+    public void moveTokensToBottom1() {
+        
+        Board board = new MatchThreeBoard(Token.set("AB"), "A B;  B; AA");
+        Set<Position> positions = board.moveTokensToBottom();
+        
+        Set<Position> expected = Stream.of(
+                Position.at(0, 0), /* -> */ Position.at(0, 2)
+                ).collect(Collectors.toSet());
+
+        assertArrayEquals(expected.toArray(), positions.toArray());
+        assertEquals("  B;  B;AAA", board.toTokenString());
+    }
+    
+    @Test
+    public void moveTokensToBottom2() {
+        
+        Board board = new MatchThreeBoard(Token.set("AB"), "ABAB ;A    ;   BA; B  B; A  A");
+        Set<Position> positions = board.moveTokensToBottom();
+        
+        Set<Position> expected = Stream.of(
+                Position.at(0, 1), /* -> */ Position.at(0, 4),
+                Position.at(0, 0), /* -> */ Position.at(0, 3),
+                Position.at(1, 0), /* -> */ Position.at(1, 2),
+                Position.at(2, 0), /* -> */ Position.at(2, 4),
+                Position.at(3, 2), /* -> */ Position.at(3, 4),
+                Position.at(3, 0), /* -> */ Position.at(3, 3)
+                ).collect(Collectors.toSet());
+
+        assertArrayEquals(expected.toArray(), positions.toArray());
+        assertEquals("     ;     ; B  A;AB BB;AAABA", board.toTokenString());
+    }
+    
+    @Test
+    public void moveTokensToBottom3() {
+        
+        Board board = new MatchThreeBoard(Token.set("ABC"), "ABC ;    ;   A; B B;    ;  A ");
+        Set<Position> positions = board.moveTokensToBottom();
+        
+        Set<Position> expected = Stream.of(
+                Position.at(0, 0), /* -> */ Position.at(0, 5),
+                Position.at(1, 3), /* -> */ Position.at(1, 5),
+                Position.at(1, 0), /* -> */ Position.at(1, 4),
+                Position.at(2, 0), /* -> */ Position.at(2, 4),
+                Position.at(3, 3), /* -> */ Position.at(3, 5),
+                Position.at(3, 2), /* -> */ Position.at(3, 4)
+                ).collect(Collectors.toSet());
+
+        assertArrayEquals(expected.toArray(), positions.toArray());
+        assertEquals("    ;    ;    ;    ; BCA;ABAB", board.toTokenString());
     }
 
 }
