@@ -103,7 +103,7 @@ public class OverallTest1 {
         TestHelper.expectOk("written-by cc2015,Malte Moer");
         TestHelper.expectOk("written-by cc2015,Malte Nagy");
         TestHelper.expectOk("written-by mc2015,Malte Nagy;Nico Moer");
-        TestHelper.expectOk("written-by li1996,Jaris Endres;Fugaard Morgan;Fugaard Morgan;Lila Antjanne");
+        TestHelper.expectOk("written-by li1996,Jaris Endres;Fugaard Morgan;Lila Antjanne");
         TestHelper.expectOk("written-by pb2017,Malte Nagy");
         TestHelper.expectOk("written-by sy2016,Andi Bagger");
         TestHelper.expectOk("written-by bi2014,Andi Bagger");
@@ -276,7 +276,7 @@ public class OverallTest1 {
         Terminal.addMultipleLinesOutputThatIsExactly("print bibliography chicago:fp2014;lin2008;qua2015;brea2015;make2016;li1996;li1996", 
                 "(Antjanne, 2008) Antjanne, Lila. \"Linux - warum ....\" Informatik aktuell (2008).",
                 "(Endres, 2015) Endres, Jaris. \"Quantenphysik lässt Forscher rätseln.\" Physik aktuell (2015).",
-                "(Endres, 1996) Endres, Jaris, Morgan, Fugaard, Morgan, Fugaard, and Antjanne, Lila. \"My idea about indoor lights.\" Paper presented at Years'con, 1996, Würselen.",
+                "(Endres, 1996) Endres, Jaris, Morgan, Fugaard, and Antjanne, Lila. \"My idea about indoor lights.\" Paper presented at Years'con, 1996, Würselen.",
                 "(Moer, 2015) Moer, Malte. \"The importance of breaks in test-driven development.\" Paper presented at (//build#conf), 2015, Candelária.",
                 "(Moer, 2014) Moer, Malte, and Moer, Nico. \"Fixpunkte im Visir.\" e^x (2014).",
                 "(Moer, 2016) Moer, Nico, and Morgan, Fugaard. \"Make programming great again!.\" Paper presented at (//build#conf), 2016, Teheran.");
