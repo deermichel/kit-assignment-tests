@@ -8,7 +8,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
     MatchThreeBoardTest.class,
     MatchThreeBoardConstructorTest.class,
-    MoveFlipRightTest.class
+    MoveFlipRightTest.class,
+    MoveReverseTest.class
 })
 
 public class AllTests { }
