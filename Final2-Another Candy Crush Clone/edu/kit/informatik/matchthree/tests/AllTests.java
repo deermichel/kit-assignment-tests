@@ -9,7 +9,8 @@ import org.junit.runners.Suite.SuiteClasses;
     MatchThreeBoardTest.class,
     MatchThreeBoardConstructorTest.class,
     MoveFlipRightTest.class,
-    MoveReverseTest.class
+    MoveReverseTest.class,
+    BoardMoveTokensToBottomTest.class
 })
 
 public class AllTests { }
