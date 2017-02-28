@@ -21,6 +21,12 @@ public final class TestUtils {
     public static <T> void assertSetOfSetsEquals(Set<Set<T>> expectedSets, Set<Set<T>> actualSets) {
 
         if ( expectedSets.size() != actualSets.size() ) {
+
+            System.out.println("EXPECTED: " + expectedSets.stream().map(set -> set.stream().map(Object::toString)
+                    .collect(Collectors.joining(", "))).collect(Collectors.joining("; ")));
+            System.out.println("ACTUAL: " + actualSets.stream().map(set -> set.stream().map(Object::toString)
+                    .collect(Collectors.joining(", "))).collect(Collectors.joining("; ")));
+
             assert false;
         }
 
@@ -39,6 +45,12 @@ public final class TestUtils {
     private static <T> boolean setEquals(Set<T> expected, Set<T> actual) {
 
         if (expected.size() != actual.size()) {
+
+            System.out.println("EXPECTED: " + expected.stream().map(Object::toString)
+                    .collect(Collectors.joining(", ")));
+            System.out.println("ACTUAL: " + actual.stream().map(Object::toString)
+                    .collect(Collectors.joining(", ")));
+
             return false;
         }
 
