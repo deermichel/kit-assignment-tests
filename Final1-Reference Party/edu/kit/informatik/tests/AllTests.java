@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
     C19Test.class,
     C20Test.class,
     C21Test.class,
+    ExmatrikomatTest.class,
     OverallTest1.class
 })
 
