@@ -59,12 +59,13 @@ public class C16Test {
         TestHelper.expectError("direct h-index 2;5;1;3;2.22;2");
         TestHelper.expectError("direct h-index 2;5;1;-3;-2;2");
         TestHelper.expectError("direct h-index 2;5;2;");
-        
+        TestHelper.expectError("direct h-index 2;5;01;3;67;2");
+        TestHelper.expectError("direct h-index 2;5;00;3;9;2");
     }
 
     @Test
     public void valid() {
-        
+        Terminal.addSingleLineOutputThatIsExactly("direct h-index 17;3;0;1;5", "3");
         Terminal.addSingleLineOutputThatIsExactly("direct h-index 17;3;1;5", "3");
         Terminal.addSingleLineOutputThatIsExactly("direct h-index 8;6;8;4;8;6", "5");
         Terminal.addSingleLineOutputThatIsExactly("direct h-index 65;234;12;4;643;12", "5");
