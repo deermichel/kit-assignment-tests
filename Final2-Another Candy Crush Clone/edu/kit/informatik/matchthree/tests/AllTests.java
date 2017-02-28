@@ -14,7 +14,8 @@ import org.junit.runners.Suite.SuiteClasses;
     MoveFlipDownTest.class,
     MoveRotateSquareClockwiseMoveTest.class,
     MoveRotateColumnDownTest.class,
-    MoveRotateRowRightTest.class
+    MoveRotateRowRightTest.class,
+    MaximumDeltaMatcherTest.class
 })
 
 public class AllTests { }
