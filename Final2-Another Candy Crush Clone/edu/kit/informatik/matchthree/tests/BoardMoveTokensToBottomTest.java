@@ -1,5 +1,7 @@
 package edu.kit.informatik.matchthree.tests;
 
+import static edu.kit.informatik.matchthree.tests.TestUtils.assertSetEquals;
+import static edu.kit.informatik.matchthree.tests.TestUtils.assertEmpty;
 import static org.junit.Assert.assertEquals;
 import edu.kit.informatik.matchthree.framework.Position;
 import org.junit.Test;
@@ -9,7 +11,6 @@ import edu.kit.informatik.matchthree.framework.Token;
 import edu.kit.informatik.matchthree.framework.interfaces.Board;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Test for MatchThreeBoard#moveTokensToBottom
@@ -123,30 +124,6 @@ public class BoardMoveTokensToBottomTest {
         assertEquals(tokenString, board.toTokenString());
     }
 
-    // adapted from http://stackoverflow.com/questions/11888554/way-to-check-if-two-collections-contain-the-same-elements-independent-of-order
-    private <T> void assertSetEquals(Set<T> expected, Set<T> actual) {
 
-        if ( expected.size() != actual.size() ) {
-            System.out.println("expected: "
-                    + expected.stream().map(Object::toString).collect(Collectors.joining(", ")));
-
-            System.out.println("actual: "
-                    + actual.stream().map(Object::toString).collect(Collectors.joining(", ")));
-            assert false;
-        }
-
-        for (T object : expected) {
-            if (actual.contains(object)) {
-                actual.remove(object);
-            } else {
-                System.out.println("Actual set does not contain " + object.toString());
-                assert false;
-            }
-        }
-    }
-
-    private <T> void assertEmpty(final Collection<T> collection) {
-        assertEquals(0, collection.size());
-    }
 
 }

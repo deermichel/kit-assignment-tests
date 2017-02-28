@@ -31,6 +31,16 @@ public class MoveRotateColumnDownTest {
         rotateCol.apply(board);
         assertEquals("XAX;***;Y*=", board.toTokenString());
     }
+
+    @Test
+    public void applyWithEmpties() {
+
+        Board board = new MatchThreeBoard(Token.set("*AXY="), " AX;Y**; *=");
+        Move rotateCol = new MoveFactoryImplementation().rotateColumnDown(0);
+        assertTrue(rotateCol.canBeApplied(board));
+        rotateCol.apply(board);
+        assertEquals(" AX; **;Y*=", board.toTokenString());
+    }
     
     @Test
     public void reverseApply() {
@@ -40,6 +50,16 @@ public class MoveRotateColumnDownTest {
         assertTrue(rotateColUp.canBeApplied(board));
         rotateColUp.apply(board);
         assertEquals("*AX;Y**;X*=", board.toTokenString());
+    }
+
+    @Test
+    public void reverseApplyWithEmpties() {
+
+        Board board = new MatchThreeBoard(Token.set("*AXY="), " AX; **;Y*=");
+        Move rotateColUp = new MoveFactoryImplementation().rotateColumnDown(0).reverse();
+        assertTrue(rotateColUp.canBeApplied(board));
+        rotateColUp.apply(board);
+        assertEquals(" AX;Y**; *=", board.toTokenString());
     }
 
 }

@@ -2,23 +2,19 @@ package edu.kit.informatik.matchthree.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.Set;
-
-import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.kit.informatik.matchthree.MatchThreeBoard;
 import edu.kit.informatik.matchthree.MoveFactoryImplementation;
 import edu.kit.informatik.matchthree.framework.Position;
 import edu.kit.informatik.matchthree.framework.Token;
-import edu.kit.informatik.matchthree.framework.exceptions.BoardDimensionException;
 import edu.kit.informatik.matchthree.framework.interfaces.Board;
 import edu.kit.informatik.matchthree.framework.interfaces.Move;
 
 /**
  * Tests for rotate square rotation move
  * 
- * @author Micha Hanselmann
+ * @author Micha Hanselmann & Florian Pfisterer
  */
 public class MoveRotateSquareClockwiseMoveTest {
     
@@ -30,6 +26,28 @@ public class MoveRotateSquareClockwiseMoveTest {
         assertTrue(rotateCW.canBeApplied(board));
         rotateCW.apply(board);
         assertEquals("**A;Y*X;X*=", board.toTokenString());
+    }
+
+    @Test
+    public void applyWithEmpties1() {
+
+        final Board board = new MatchThreeBoard(Token.set("abc"), "a b; b ");
+        final Move rotateCW = new MoveFactoryImplementation().rotateSquareClockwise(Position.at(0, 0));
+
+        assertTrue(rotateCW.canBeApplied(board));
+        rotateCW.apply(board);
+        assertEquals(" ab;b  ", board.toTokenString());
+    }
+
+    @Test
+    public void reverseApplyWithEmpties1() {
+
+        final Board board = new MatchThreeBoard(Token.set("abc"), " ab;b  ");
+        final Move rotateCW = new MoveFactoryImplementation().rotateSquareClockwise(Position.at(0, 0)).reverse();
+
+        assertTrue(rotateCW.canBeApplied(board));
+        rotateCW.apply(board);
+        assertEquals("a b; b ", board.toTokenString());
     }
     
     @Test

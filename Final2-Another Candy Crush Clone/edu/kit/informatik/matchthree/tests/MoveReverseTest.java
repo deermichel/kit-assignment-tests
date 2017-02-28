@@ -116,9 +116,8 @@ public class MoveReverseTest {
         move.apply(board);
         reversed.apply(board);
         assertNotEquals(originalTokenString, board.toTokenString());
-        
+
         move.apply(board);
-        // TODO: assertNotEquals(originalTokenString, board.toTokenString()); - my fault or bad test?
 
         reversed.apply(board);
         reversed.apply(board);
