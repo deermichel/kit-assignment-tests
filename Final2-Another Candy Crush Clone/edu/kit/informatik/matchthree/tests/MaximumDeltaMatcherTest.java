@@ -137,4 +137,52 @@ public class MaximumDeltaMatcherTest {
         assertSetOfSetsEquals(expectedMatches, actualMatches);
     }
 
+    // -- Own Tests (specifically testing cases where not all reachable positions magically have the same token)
+    @Test
+    public void testDeltaMatch01() {
+
+        final Board board = new MatchThreeBoard(Token.set("ABC"), "ACAC;CACC;ACBC;ACAA");
+        final Set<Delta> deltas = new HashSet<>(Arrays.asList(
+                Delta.dxy(2, 0),
+                Delta.dxy(0, 2),
+                Delta.dxy(1, 1)
+        ));
+
+        final Position initial = Position.at(0, 0);
+        final Set<Set<Position>> actualMatches = new MaximumDeltaMatcher(deltas).match(board, initial);
+
+        final Set<Set<Position>> expectedMatches = new HashSet<>();
+        final Set<Position> match = new HashSet<>(Arrays.asList(
+                Position.at(0, 0),
+                Position.at(0, 2),
+                Position.at(2, 0),
+                Position.at(1, 1)
+        ));
+        expectedMatches.add(match);
+
+        assertSetOfSetsEquals(expectedMatches, actualMatches);
+    }
+
+    @Test
+    public void testDeltaMatch02() {
+
+        final Board board = new MatchThreeBoard(Token.set("ABC*"), "A*A*;*A*C;ABBB;AACA");
+        final Set<Delta> deltas = new HashSet<>(Arrays.asList(
+                Delta.dxy(2, 0),
+                Delta.dxy(-1, -1)
+        ));
+
+        final Position initial = Position.at(1, 1);
+        final Set<Set<Position>> actualMatches = new MaximumDeltaMatcher(deltas).match(board, initial);
+
+        final Set<Set<Position>> expectedMatches = new HashSet<>();
+        final Set<Position> match = new HashSet<>(Arrays.asList(
+                Position.at(1, 1),
+                Position.at(0, 0),
+                Position.at(2, 0)
+        ));
+        expectedMatches.add(match);
+
+        assertSetOfSetsEquals(expectedMatches, actualMatches);
+    }
 }
