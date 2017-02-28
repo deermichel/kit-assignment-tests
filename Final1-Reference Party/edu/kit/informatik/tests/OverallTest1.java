@@ -103,6 +103,8 @@ public class OverallTest1 {
         TestHelper.expectOk("written-by cc2015,Malte Moer");
         TestHelper.expectOk("written-by cc2015,Malte Nagy");
         TestHelper.expectOk("written-by mc2015,Malte Nagy;Nico Moer");
+        // https://ilias.studium.kit.edu/goto.php?target=frm_583580_84506
+        TestHelper.expectError("written-by li1996,Jaris Endres;Fugaard Morgan;Lila Antjanne;Fugaard Morgan");
         TestHelper.expectOk("written-by li1996,Jaris Endres;Fugaard Morgan;Lila Antjanne");
         TestHelper.expectOk("written-by pb2017,Malte Nagy");
         TestHelper.expectOk("written-by sy2016,Andi Bagger");
