@@ -203,7 +203,7 @@ public class MaximumDeltaMatcherTest {
         final Board board = new MatchThreeBoard(Token.set("AB"), tokenString.toString());
         final Set<Delta> deltas = new HashSet<>(Arrays.asList(Delta.dxy(1, 0), Delta.dxy(0, 1)));
 
-        final Set<Set<Position>> matches = new MaximumDeltaMatcher(deltas).match(board, Position.at(0, 0));
+        new MaximumDeltaMatcher(deltas).match(board, Position.at(0, 0));
 
         // maybe some assertion of the matches will be added later (focus of
         // this test is sufficient recursion depth)

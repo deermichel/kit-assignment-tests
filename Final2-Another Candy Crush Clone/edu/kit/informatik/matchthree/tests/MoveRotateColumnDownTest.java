@@ -2,16 +2,11 @@ package edu.kit.informatik.matchthree.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.Set;
-
-import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.kit.informatik.matchthree.MatchThreeBoard;
 import edu.kit.informatik.matchthree.MoveFactoryImplementation;
-import edu.kit.informatik.matchthree.framework.Position;
 import edu.kit.informatik.matchthree.framework.Token;
-import edu.kit.informatik.matchthree.framework.exceptions.BoardDimensionException;
 import edu.kit.informatik.matchthree.framework.interfaces.Board;
 import edu.kit.informatik.matchthree.framework.interfaces.Move;
 
