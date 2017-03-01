@@ -121,6 +121,7 @@ public class MatchThreeBoardConstructorTest {
     }
 
     @Test(expected = TokenStringParseException.class)
+    @Ignore("throw new IliasPostException - maybe *insert random exception* is more applicable here?")
     public void testBoardDimensionsException05() {
         new MatchThreeBoard(Token.set("abc"), "nothing here");
     }
