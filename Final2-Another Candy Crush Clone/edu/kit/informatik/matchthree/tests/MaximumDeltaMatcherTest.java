@@ -185,4 +185,54 @@ public class MaximumDeltaMatcherTest {
 
         assertSetOfSetsEquals(expectedMatches, actualMatches);
     }
+
+    /**
+     * this test ensures that the matcher works with very large boards that
+     * contain a very large match (in this case, a board with 5000 tokens that
+     * all match)
+     */
+    @Test(timeout = 5000)
+    public void testDeltaMatchLargeBoard1() {
+
+        // used to build a huge-**s token string
+        StringBuilder tokenString = new StringBuilder();
+
+        for (int i = 1; i < 5000; ++i) {
+            tokenString.append("A");
+            if (i % 500 == 0) {
+                tokenString.append(';');
+            }
+        }
+        tokenString.append("A");
+
+        final Board board = new MatchThreeBoard(Token.set("AB"), tokenString.toString());
+        final Set<Delta> deltas = new HashSet<>(Arrays.asList(Delta.dxy(1, 0), Delta.dxy(0, 1)));
+
+        new MaximumDeltaMatcher(deltas).match(board, Position.at(0, 0));
+    }
+
+    /**
+     * this test ensures that the matcher works somewhat efficiently. Although
+     * the board is very large, test should be very quick as only one token is
+     * matched.
+     */
+    @Test(timeout = 2000)
+    public void testDeltaMatchLargeBoard2() {
+
+        // used to build a huge-**s token string
+        StringBuilder tokenString = new StringBuilder();
+
+        for (int i = 1; i < 10000; ++i) {
+            tokenString.append("B");
+            if (i % 1000 == 0) {
+                tokenString.append(';');
+            }
+        }
+        tokenString.append("A");
+
+        final Board board = new MatchThreeBoard(Token.set("AB"), tokenString.toString());
+        final Set<Delta> deltas = new HashSet<>(Arrays.asList(Delta.dxy(1, 0), Delta.dxy(0, 1)));
+        
+        new MaximumDeltaMatcher(deltas).match(board, Position.at(999, 9));
+    }
 }

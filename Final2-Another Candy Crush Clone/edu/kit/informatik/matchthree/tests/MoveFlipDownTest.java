@@ -73,12 +73,14 @@ public class MoveFlipDownTest {
     public void getAffectedPositions() {
 
         Board board = new MatchThreeBoard(Token.set("AB"), 3, 3);
-        Move flipDown = new MoveFactoryImplementation().flipDown(Position.at(0, 2));
-        
+        // changed initial position, as the move would have been illegal
+        // otherwise (or was this intended?)
+        Move flipDown = new MoveFactoryImplementation().flipDown(Position.at(0, 1));
+
         Set<Position> p = flipDown.getAffectedPositions(board);
         assertEquals(p.size(), 2);
+        assertTrue(p.contains(Position.at(0, 1)));
         assertTrue(p.contains(Position.at(0, 2)));
-        assertTrue(p.contains(Position.at(0, 3)));
     }
     
     @Ignore("throw new IliasPostException - same procedure as every year")

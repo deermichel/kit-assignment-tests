@@ -2,19 +2,13 @@ package edu.kit.informatik.matchthree.tests;
 
 import edu.kit.informatik.matchthree.MoveFactoryImplementation;
 import edu.kit.informatik.matchthree.framework.Position;
-import edu.kit.informatik.matchthree.framework.exceptions.BoardDimensionException;
-import edu.kit.informatik.matchthree.framework.exceptions.TokenStringParseException;
 
 import edu.kit.informatik.matchthree.framework.interfaces.Move;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.kit.informatik.matchthree.MatchThreeBoard;
 import edu.kit.informatik.matchthree.framework.Token;
 import edu.kit.informatik.matchthree.framework.interfaces.Board;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 

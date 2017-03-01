@@ -2,6 +2,9 @@ package edu.kit.informatik.matchthree.tests;
 
 import static org.junit.Assert.*;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.junit.Test;
 
 import edu.kit.informatik.matchthree.MatchThreeBoard;
@@ -68,6 +71,26 @@ public class MoveRotateSquareClockwiseMoveTest {
         assertTrue(rotateCCW.canBeApplied(board));
         rotateCCW.apply(board);
         assertEquals("*AX;***;YX=", board.toTokenString());
+    }
+
+    @Test
+    public void affectedPositions1() {
+
+        Board board = new MatchThreeBoard(Token.set("*AXY="), "*AX;Y**;X*=");
+        Position current = Position.at(1, 0);
+        Move rotateCW = new MoveFactoryImplementation().rotateSquareClockwise(current);
+        TestUtils.assertSetEquals(rotateCW.getAffectedPositions(board), Stream
+                .of(current, current.plus(1, 0), current.plus(1, 1), current.plus(0, 1)).collect(Collectors.toSet()));
+    }
+
+    @Test
+    public void affectedPositions2() {
+
+        Board board = new MatchThreeBoard(Token.set("*AXY="), "*AX;Y**;X*=");
+        Position current = Position.at(1, 0);
+        Move rotateCCW = new MoveFactoryImplementation().rotateSquareClockwise(current).reverse();
+        TestUtils.assertSetEquals(rotateCCW.getAffectedPositions(board), Stream
+                .of(current, current.plus(1, 0), current.plus(1, 1), current.plus(0, 1)).collect(Collectors.toSet()));
     }
 
 }
