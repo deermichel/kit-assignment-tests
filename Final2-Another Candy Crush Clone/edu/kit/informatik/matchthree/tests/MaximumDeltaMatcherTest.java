@@ -194,7 +194,7 @@ public class MaximumDeltaMatcherTest {
     @Test(timeout = 5000)
     public void testDeltaMatchLargeBoard1() {
 
-        // used to build a huge-ass token string
+        // used to build a huge-**s token string
         StringBuilder tokenString = new StringBuilder();
 
         for (int i = 1; i < 5000; ++i) {
