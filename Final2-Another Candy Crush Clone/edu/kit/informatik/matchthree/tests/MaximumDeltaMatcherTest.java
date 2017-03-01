@@ -185,4 +185,27 @@ public class MaximumDeltaMatcherTest {
 
         assertSetOfSetsEquals(expectedMatches, actualMatches);
     }
+
+    @Test
+    public void testDeltaMatchLargeBoard() {
+
+        // used to build a huge-ass token string
+        StringBuilder tokenString = new StringBuilder();
+
+        for (int i = 1; i < 1000000; ++i) {
+            tokenString.append("A");
+            if (i % 1000 == 0) {
+                tokenString.append(';');
+            }
+        }
+        tokenString.append("A");
+
+        final Board board = new MatchThreeBoard(Token.set("AB"), tokenString.toString());
+        final Set<Delta> deltas = new HashSet<>(Arrays.asList(Delta.dxy(1, 0), Delta.dxy(0, 1)));
+
+        final Set<Set<Position>> matches = new MaximumDeltaMatcher(deltas).match(board, Position.at(0, 0));
+
+        // maybe some assertion of the matches will be added later (focus of
+        // this test is sufficient recursion depth)
+    }
 }
