@@ -18,7 +18,7 @@ import edu.kit.informatik.matchthree.framework.interfaces.Move;
 /**
  * Tests for rotate row right move
  * 
- * @author Micha Hanselmann
+ * @author Micha Hanselmann & Florian Pfisterer
  */
 public class MoveRotateRowRightTest {
     
@@ -31,6 +31,16 @@ public class MoveRotateRowRightTest {
         rotateRow.apply(board);
         assertEquals("X*A;Y**;X*=", board.toTokenString());
     }
+
+    @Test
+    public void applyWithEmpties() {
+
+        Board board = new MatchThreeBoard(Token.set("*AXY="), "*A ;Y**;X*=");
+        Move rotateRow = new MoveFactoryImplementation().rotateRowRight(0);
+        assertTrue(rotateRow.canBeApplied(board));
+        rotateRow.apply(board);
+        assertEquals(" *A;Y**;X*=", board.toTokenString());
+    }
     
     @Test
     public void reverseApply() {
@@ -40,6 +50,16 @@ public class MoveRotateRowRightTest {
         assertTrue(rotateRowLeft.canBeApplied(board));
         rotateRowLeft.apply(board);
         assertEquals("*AX;Y**;X*=", board.toTokenString());
+    }
+
+    @Test
+    public void reverseApplyWithEmpties() {
+
+        Board board = new MatchThreeBoard(Token.set("*AXY="), " *A;Y**;X*=");
+        Move rotateRowLeft = new MoveFactoryImplementation().rotateRowRight(0).reverse();
+        assertTrue(rotateRowLeft.canBeApplied(board));
+        rotateRowLeft.apply(board);
+        assertEquals("*A ;Y**;X*=", board.toTokenString());
     }
 
 }
