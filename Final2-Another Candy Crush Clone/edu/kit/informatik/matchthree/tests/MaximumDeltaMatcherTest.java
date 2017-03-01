@@ -186,15 +186,15 @@ public class MaximumDeltaMatcherTest {
         assertSetOfSetsEquals(expectedMatches, actualMatches);
     }
 
-    @Test
+    @Test(timeout=5000)
     public void testDeltaMatchLargeBoard() {
 
         // used to build a huge-ass token string
         StringBuilder tokenString = new StringBuilder();
 
-        for (int i = 1; i < 1000000; ++i) {
+        for (int i = 1; i < 5000; ++i) {
             tokenString.append("A");
-            if (i % 1000 == 0) {
+            if (i % 500 == 0) {
                 tokenString.append(';');
             }
         }
