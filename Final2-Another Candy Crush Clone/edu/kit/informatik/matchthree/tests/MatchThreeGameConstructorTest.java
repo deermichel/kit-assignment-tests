@@ -33,9 +33,9 @@ public class MatchThreeGameConstructorTest {
     }
     
     /**
-     * Expecting {@link IllegalArgumentException} because of invalid {@link Matcher}.
+     * Expecting {@link NullPointerException} because of invalid {@link Matcher}.
      */
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = NullPointerException.class)
     public void invalidMatcherTest() {
         Board board = new MatchThreeBoard(Token.set("XY"), 2, 2);
         
