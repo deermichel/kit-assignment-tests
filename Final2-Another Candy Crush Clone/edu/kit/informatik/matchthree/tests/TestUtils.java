@@ -20,7 +20,7 @@ public final class TestUtils {
 
     public static <T> void assertSetOfSetsEquals(Set<Set<T>> expectedSets, Set<Set<T>> actualSets) {
 
-        if ( expectedSets.size() != actualSets.size() ) {
+        if (expectedSets.size() != actualSets.size()) {
 
             System.out.println("EXPECTED: " + expectedSets.stream().map(set -> set.stream().map(Object::toString)
                     .collect(Collectors.joining(", "))).collect(Collectors.joining("; ")));
