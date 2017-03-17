@@ -4,6 +4,10 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import edu.kit.informatik.matchthree.framework.Position;
+import edu.kit.informatik.matchthree.framework.Token;
+import edu.kit.informatik.matchthree.framework.interfaces.Board;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -63,6 +67,24 @@ public final class TestUtils {
             }
         }
 
+        return true;
+    }
+    
+    /**
+     * Returns 'true' if entire {@link Board} is filled, meaning that there is not a
+     *   single {@link Position} without a {@link Token}.
+     *   
+     * @param board The board to check
+     * @return 'true' if completely filled, 'false' otherwise
+     */
+    public static boolean boardIsFilled(Board board) {
+        for (int i = 0; i < board.getRowCount(); i++) {
+            for (int j = 0; j < board.getColumnCount(); j++) {
+                if (board.getTokenAt(Position.at(j, i)) == null)
+                    return false;
+            }
+        }
+        
         return true;
     }
 }
