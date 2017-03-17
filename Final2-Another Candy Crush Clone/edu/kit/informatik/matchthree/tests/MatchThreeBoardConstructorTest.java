@@ -20,7 +20,10 @@ import java.util.stream.Collectors;
 /**
  * Test for the two board constructors (A.1.1, A.1.2)
  *
- * @author IPD Koziolek & Florian Pfisterer
+ * @author IPD Koziolek
+ * @author Florian Pfisterer
+ * @author Luke Brocke
+ * 
  * Based on templates & inspiration from Micha Hanselmann & IPD Koziolek
  */
 public class MatchThreeBoardConstructorTest {
@@ -86,6 +89,15 @@ public class MatchThreeBoardConstructorTest {
         assertEquals(2, board.getColumnCount());
         assertEquals(2, board.getRowCount());
         assertEquals("  ;  ", board.toTokenString());
+    }
+    
+    // dedicated to jcg, may the test-driven development be with you
+    @Test
+    public void ultimateWidthHeightConfusionTest() {
+        Board board = new MatchThreeBoard(Token.set("AB"), 2, 3);
+        
+        assertEquals(2, board.getColumnCount());
+        assertEquals(3, board.getRowCount());
     }
 
     // -- Invalid tokens
