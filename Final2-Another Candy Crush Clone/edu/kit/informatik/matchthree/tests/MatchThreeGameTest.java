@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.kit.informatik.matchthree.MatchThreeBoard;
@@ -12,6 +14,7 @@ import edu.kit.informatik.matchthree.MaximumDeltaMatcher;
 import edu.kit.informatik.matchthree.MoveFactoryImplementation;
 import edu.kit.informatik.matchthree.framework.Delta;
 import edu.kit.informatik.matchthree.framework.Position;
+import edu.kit.informatik.matchthree.framework.RandomStrategy;
 import edu.kit.informatik.matchthree.framework.Token;
 import edu.kit.informatik.matchthree.framework.exceptions.BoardDimensionException;
 import edu.kit.informatik.matchthree.framework.interfaces.Board;
@@ -82,6 +85,7 @@ public class MatchThreeGameTest {
     @Test
     public void initializeFillBoardTest() {
         Board board = new MatchThreeBoard(Token.set("AB"), 5, 5);
+        board.setFillingStrategy(new RandomStrategy());
         Matcher matcher = new MaximumDeltaMatcher(new HashSet<>(Arrays.asList(Delta.dxy(0, 1))));
         
         MatchThreeGame game = new MatchThreeGame(board, matcher);
