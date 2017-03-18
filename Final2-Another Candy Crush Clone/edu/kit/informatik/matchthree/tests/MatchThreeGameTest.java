@@ -60,7 +60,11 @@ public class MatchThreeGameTest {
     
     /**
      * Initial score of a new {@link MatchThreeGame} is 0.
+     *
+     * As sb pointed out, the score could be > 0 after initialization because
+     *   some matches could have already been found after the random fill
      */
+    @Ignore
     @Test
     public void initializeScoreTest() {
         Board board = new MatchThreeBoard(Token.set("AB"), 5, 5);
