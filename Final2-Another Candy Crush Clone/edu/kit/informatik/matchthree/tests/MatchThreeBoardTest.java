@@ -302,12 +302,18 @@ public class MatchThreeBoardTest {
             ).collect(Collectors.toSet()));
     }
     
-    @Test (expected = BoardDimensionException.class)
+    @Test(expected = BoardDimensionException.class)
     public void removeTokensAtInvalidPosition3() {
-        new MatchThreeBoard(Token.set("AB"), "A B;  B; AA")
-            .removeTokensAt(Stream.of(
-                    Position.at(0, 0), Position.at(0, 3)
-            ).collect(Collectors.toSet()));
+        MatchThreeBoard board = new MatchThreeBoard(Token.set("AB"), "A B;  B; AA");
+        try {
+            new MatchThreeBoard(Token.set("AB"), "A B;  B; AA")
+                    .removeTokensAt(Stream.of(
+                            Position.at(0, 0), Position.at(0, 3)
+                    ).collect(Collectors.toSet()));
+        } catch (BoardDimensionException e) {
+            assertEquals(board.getTokenAt(Position.at(0, 0)), new Token("A"));
+            throw e;
+        }
     }
     
     @Test (expected = NullPointerException.class)
