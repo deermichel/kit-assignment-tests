@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.kit.informatik.matchthree.MatchThreeBoard;
