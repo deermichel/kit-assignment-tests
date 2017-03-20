@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -12,6 +14,7 @@ import edu.kit.informatik.matchthree.MatchThreeGame;
 import edu.kit.informatik.matchthree.MaximumDeltaMatcher;
 import edu.kit.informatik.matchthree.MoveFactoryImplementation;
 import edu.kit.informatik.matchthree.framework.Delta;
+import edu.kit.informatik.matchthree.framework.FillingStrategy;
 import edu.kit.informatik.matchthree.framework.Position;
 import edu.kit.informatik.matchthree.framework.RandomStrategy;
 import edu.kit.informatik.matchthree.framework.Token;
@@ -97,5 +100,79 @@ public class MatchThreeGameTest {
         game.initializeBoardAndStart();
         
         assertTrue(TestUtils.boardIsFilled(board));
+    }
+
+    /**
+     * This test asserts that matches with less than 3 positions are not
+     * evaluated
+     * 
+     * @author NicoWeidmann
+     */
+    @Test
+    public void matchFilterTest() {
+
+        // this board contains matches with a size below 3
+        Board board = new MatchThreeBoard(Token.set("AE"), "AAAA;AAAA;AAAA;AAAA");
+
+        // if this token is found on the board, a match was evaluated
+        final Token evilToken = new Token('E');
+
+        board.setFillingStrategy(new FillingStrategy() {
+
+            // fills every empty position with the evil token
+            @Override
+            public void fill(Board board) {
+                for (int x = 0; x < board.getColumnCount(); ++x) {
+                    for (int y = 0; y < board.getRowCount(); ++y) {
+                        if (board.getTokenAt(Position.at(x, y)) == null) {
+                            board.setTokenAt(Position.at(x, y), evilToken);
+                        }
+                    }
+                }
+            }
+        });
+
+        // a matcher that returns three hardcoded matches on first call, then
+        // returns no matches (to prevent infinite loops)
+        final class FakeMatcher implements Matcher {
+
+            private boolean called = false;
+
+            @Override
+            public Set<Set<Position>> matchAll(Board board, Set<Position> initial) {
+                return match(board, Position.at(0, 0));
+            }
+
+            @Override
+            public Set<Set<Position>> match(Board board, Position initial) {
+
+                if (called) {
+                    // no matches
+                    return new HashSet<>();
+                } else {
+                    return new HashSet<>(Arrays.asList(new HashSet<>(Arrays.asList(Position.at(0, 0))),
+                            new HashSet<>(Arrays.asList(Position.at(0, 0), Position.at(0, 1))),
+                            new HashSet<>(/* empty */)));
+                }
+            }
+        }
+        ;
+
+        MatchThreeGame game = new MatchThreeGame(board, new FakeMatcher());
+        game.initializeBoardAndStart();
+
+        // score must be null, as no matches should be evaluated
+        assertEquals(game.getScore(), 0);
+
+        // resetting matcher
+        game.setMatcher(new FakeMatcher());
+
+        game.acceptMove((new MoveFactoryImplementation()).flipRight(Position.at(0, 1)));
+
+        // score must still be null
+        assertEquals(game.getScore(), 0);
+
+        assertTrue("The evil token was found! The game evaluated a match of size <3.",
+                !board.toTokenString().contains(evilToken.toString()));
     }
 }
