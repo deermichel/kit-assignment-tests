@@ -1,7 +1,9 @@
-package edu.kit.informatik.matchthree;
+package edu.kit.informatik.matchthree.tests;
 
 import java.util.Set;
 import java.util.HashSet;
+
+import edu.kit.informatik.matchthree.MaximumDeltaMatcher;
 import edu.kit.informatik.matchthree.framework.Position;
 import edu.kit.informatik.matchthree.framework.exceptions.BoardDimensionException;
 import edu.kit.informatik.matchthree.framework.interfaces.*;

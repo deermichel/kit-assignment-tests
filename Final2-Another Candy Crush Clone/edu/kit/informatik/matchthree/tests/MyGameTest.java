@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import org.junit.Test;
 import edu.kit.informatik.matchthree.framework.*;
 import edu.kit.informatik.matchthree.MatchThreeBoard;
-import edu.kit.informatik.matchthree.MultiMatcher;
 import edu.kit.informatik.matchthree.MatchThreeGame;
 import edu.kit.informatik.matchthree.MaximumDeltaMatcher;
 import edu.kit.informatik.matchthree.MoveFactoryImplementation;
