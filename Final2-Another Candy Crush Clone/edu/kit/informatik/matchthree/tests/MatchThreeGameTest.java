@@ -4,10 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
-<<<<<<< HEAD
-
-=======
->>>>>>> DeerMichel/master
 import org.junit.Ignore;
 import org.junit.Test;
 
