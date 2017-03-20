@@ -33,7 +33,6 @@ public class MyGameTest {
     /**
      * Valid test for {@link Game#acceptMove(Move)}, {@link Game#initializeBoardAndStart()}
      */
-    
     @Test
     public void initializeFillBoardTest1() {
         Board board = new MatchThreeBoard(Token.set("ABCD"), "BAB;BAA;BAC");
@@ -97,7 +96,6 @@ public class MyGameTest {
     /**
      * Test from Praktomat
      */
-    
     @Test
     public void initializeFillBoardTest2() {
         Board b = new MatchThreeBoard(Token.set("AXO*"), "O*O;***;O*O;O*O");
