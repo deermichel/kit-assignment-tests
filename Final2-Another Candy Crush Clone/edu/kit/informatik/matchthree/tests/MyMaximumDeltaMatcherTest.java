@@ -136,6 +136,7 @@ public class MyMaximumDeltaMatcherTest {
         assertSetOfSetsEquals(expectedMatches, actualMatches);
     }
     
+    @Test
     public void myTest5() {
         final Board board = new MatchThreeBoard(Token.set("ABC"), "B B; AB;ABA");
         Delta delta1 = new Delta(1,1);
@@ -156,8 +157,9 @@ public class MyMaximumDeltaMatcherTest {
                 Position.at(2, 2)
         ));
         expectedMatches.add(match);
-        Set<Position> match2 = new HashSet<Position>();
-        expectedMatches.add(match2);
+        // See Issue #39
+//        Set<Position> match2 = new HashSet<Position>();
+//        expectedMatches.add(match2);
         final Set<Position> match3 = new HashSet<>(Arrays.asList(
                 Position.at(1, 2),
                 Position.at(2, 1)
