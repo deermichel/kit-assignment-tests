@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -12,6 +15,7 @@ import edu.kit.informatik.matchthree.MatchThreeGame;
 import edu.kit.informatik.matchthree.MaximumDeltaMatcher;
 import edu.kit.informatik.matchthree.MoveFactoryImplementation;
 import edu.kit.informatik.matchthree.framework.Delta;
+import edu.kit.informatik.matchthree.framework.DeterministicStrategy;
 import edu.kit.informatik.matchthree.framework.Position;
 import edu.kit.informatik.matchthree.framework.RandomStrategy;
 import edu.kit.informatik.matchthree.framework.Token;
@@ -29,6 +33,25 @@ import edu.kit.informatik.matchthree.framework.interfaces.Move;
 public class MatchThreeGameTest {
     // A FillingStrategy will be set for the board, the MatchThreeGame constructor MUST NOT do that
     // see https://ilias.studium.kit.edu/ilias.php?ref_id=583580&cmdClass=ilobjforumgui&thr_pk=85450&cmd=viewThread&cmdNode=75:r6&baseClass=ilrepositorygui
+    
+    // quick and dirty iterator for DeterministicStrategy
+    private class RepeatingToken implements Iterator<Token> {
+        private char c;
+        
+        public RepeatingToken(char c) {
+            this.c = c;
+        }
+        
+        @Override
+        public boolean hasNext() {
+            return true;
+        }
+        
+        @Override
+        public Token next() {
+            return new Token(this.c);
+        }  
+    }
     
     /**
      * {@link Game#acceptMove(Move)} should throw a {@link BoardDimensionException} if the given
@@ -66,25 +89,6 @@ public class MatchThreeGameTest {
     }
     
     /**
-     * Initial score of a new {@link MatchThreeGame} is 0.
-     *
-     * As sb pointed out, the score could be > 0 after initialization because
-     *   some matches could have already been found after the random fill
-     */
-    @Ignore
-    @Test
-    public void initializeScoreTest() {
-        Board board = new MatchThreeBoard(Token.set("AB"), 5, 5);
-        board.setFillingStrategy(new RandomStrategy());
-        Matcher matcher = new MaximumDeltaMatcher(new HashSet<>(Arrays.asList(Delta.dxy(0, 1))));
-        
-        MatchThreeGame game = new MatchThreeGame(board, matcher);
-        game.initializeBoardAndStart();
-        
-        assertEquals(0, game.getScore());
-    }
-    
-    /**
      * {@link Board} should get filled entirely on initialization.
      */
     @Test
@@ -97,5 +101,31 @@ public class MatchThreeGameTest {
         game.initializeBoardAndStart();
         
         assertTrue(TestUtils.boardIsFilled(board));
+    }
+    
+    @Test
+    public void initializeMatchAndScoreTest() {
+        Board board = new MatchThreeBoard(Token.set("ABCDX"), "ADBC;AABC;BBCD;CABC");
+        
+        DeterministicStrategy strat = new DeterministicStrategy();
+        strat.setTokenIteratorForColumn(0, new RepeatingToken('D'));
+        strat.setTokenIteratorForColumn(1, new RepeatingToken('A'));
+        strat.setTokenIteratorForColumn(2, new RepeatingToken('X'));
+        strat.setTokenIteratorForColumn(3, new RepeatingToken('X'));
+        board.setFillingStrategy(strat);
+        
+        Set<Delta> deltas = new HashSet<>();
+        deltas.add(Delta.dxy(1, 0));
+        deltas.add(Delta.dxy(0, 1));
+        Matcher matcher = new MaximumDeltaMatcher(deltas);
+        
+        Game game = new MatchThreeGame(board, matcher);
+        game.initializeBoardAndStart();
+        
+        // tokenString of board should be
+        //   DABC;DABC;BBCD;CABC
+        // now
+        
+        assertEquals(9, game.getScore());
     }
 }
