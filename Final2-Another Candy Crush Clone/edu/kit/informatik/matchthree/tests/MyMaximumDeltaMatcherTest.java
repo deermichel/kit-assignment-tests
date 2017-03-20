@@ -97,8 +97,10 @@ public class MyMaximumDeltaMatcherTest {
                 Position.at(2, 2)
         ));
         expectedMatches.add(match);
-        Set<Position> match2 = new HashSet<Position>();
-        expectedMatches.add(match2);
+        
+        // see Issue #39
+//        Set<Position> match2 = new HashSet<Position>();
+//        expectedMatches.add(match2);
         assertSetOfSetsEquals(expectedMatches, actualMatches);
     }
     
