@@ -17,12 +17,9 @@ import org.junit.runners.Suite.SuiteClasses;
     MoveReverseTest.class,
     MoveRotateColumnDownTest.class,
     MoveRotateRowRightTest.class,
-    MaximumDeltaMatcherTest.class,
-    MatchThreeGameConstructorTest.class,
-    MatchThreeGameTest.class,
+    MoveRotateSquareClockwiseMoveTest.class,
     MyGameTest.class,
     MyMaximumDeltaMatcherTest.class,
-    MoveRotateSquareClockwiseMoveTest.class
 })
 
 public class AllTests { }
