@@ -8,7 +8,7 @@ import edu.kit.informatik.matchthree.framework.Position;
 import edu.kit.informatik.matchthree.framework.Token;
 import edu.kit.informatik.matchthree.framework.interfaces.Board;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * TestUtils as an extension to junit's Assert lib
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public final class TestUtils {
 
     public static <T> void assertSetEquals(Set<T> expected, Set<T> actual) {
-        assert TestUtils.setEquals(expected, actual);
+        assertTrue(TestUtils.setEquals(expected, actual));
     }
 
     public static <T> void assertSetOfSetsEquals(Set<Set<T>> expectedSets, Set<Set<T>> actualSets) {
@@ -31,12 +31,12 @@ public final class TestUtils {
             System.out.println("ACTUAL: " + actualSets.stream().map(set -> set.stream().map(Object::toString)
                     .collect(Collectors.joining(", "))).collect(Collectors.joining("; ")));
 
-            assert false;
+            fail();
         }
 
         for (Set<T> expected : expectedSets) {
             if (actualSets.stream().noneMatch(actual -> TestUtils.setEquals(expected, actual))) {
-                assert false;
+                fail();
             }
         }
     }
