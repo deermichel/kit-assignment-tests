@@ -132,20 +132,17 @@ public class MatchThreeBoardConstructorTest {
         new MatchThreeBoard(Token.set("abc"), "aa;bb;cc;");
     }
 
-    @Test(expected = TokenStringParseException.class)
-    @Ignore("throw new IliasPostException - maybe *insert random exception* is more applicable here?")
+    @Test(expected = RuntimeException.class)
     public void testBoardDimensionsException05() {
         new MatchThreeBoard(Token.set("abc"), "nothing here");
     }
 
-    @Ignore("throw new IliasPostException - maybe BoardDimensionException is more applicable here?")
-    @Test(expected = TokenStringParseException.class)
+    @Test(expected = RuntimeException.class)
     public void testBoardDimensionsException06() {
         new MatchThreeBoard(Token.set("abc"), "");
     }
 
-    @Ignore("throw new IliasPostException - maybe BoardDimensionException is more applicable here?")
-    @Test(expected = TokenStringParseException.class)
+    @Test(expected = RuntimeException.class)
     public void testBoardDimensionsException07() {
         new MatchThreeBoard(Token.set("abc"), ";;;");
     }
