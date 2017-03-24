@@ -77,8 +77,7 @@ public class MatchThreeBoardTest {
         assertEquals(5, board.getRowCount());
     }
 
-    @Ignore("maybe TokenStringParse?")
-    @Test (expected = BoardDimensionException.class)
+    @Test(expected = IllegalArgumentExceptions.class)
     public void tokenStringConstructorInvalidSize() {
         
         new MatchThreeBoard(Token.set("AB"), "");
