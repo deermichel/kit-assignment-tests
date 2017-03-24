@@ -77,7 +77,7 @@ public class MatchThreeBoardTest {
         assertEquals(5, board.getRowCount());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IllegalArgumentExceptions.class)
     public void tokenStringConstructorInvalidSize() {
         
         new MatchThreeBoard(Token.set("AB"), "");

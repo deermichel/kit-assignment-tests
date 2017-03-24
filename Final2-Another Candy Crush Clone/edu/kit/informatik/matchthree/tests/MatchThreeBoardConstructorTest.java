@@ -132,17 +132,17 @@ public class MatchThreeBoardConstructorTest {
         new MatchThreeBoard(Token.set("abc"), "aa;bb;cc;");
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IllegalArgumentExceptions.class)
     public void testBoardDimensionsException05() {
         new MatchThreeBoard(Token.set("abc"), "nothing here");
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IllegalArgumentExceptions.class)
     public void testBoardDimensionsException06() {
         new MatchThreeBoard(Token.set("abc"), "");
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IllegalArgumentExceptions.class)
     public void testBoardDimensionsException07() {
         new MatchThreeBoard(Token.set("abc"), ";;;");
     }
